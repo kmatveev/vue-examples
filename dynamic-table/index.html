@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+       function initMyApp() {
+
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    colors: ['black', 'red', 'blue', 'green', 'yellow']
+  },
+  methods: {
+    moveUp: function(index) {
+      console.log("Index=" + index);
+      var movingItem = this.colors[index];
+      if (index > 0) {
+        this.colors.splice(index, 1);
+        this.colors.splice(index - 1, 0, movingItem);
+      }
+    },
+    moveDown: function(index) {
+      console.log("Index=" + index);
+      var movingItem = this.colors[index];
+      if (index < (this.colors.length - 1)) {
+        this.colors.splice(index, 1);
+        this.colors.splice(index + 1, 0, movingItem);
+      }
+
+    }
+  }
+})
+
+       }
+    </script>
+  </head>
+
+  <body onLoad="initMyApp()">
+
+    <div id="app-7">
+      <table>
+        <template v-for="(item, index) in colors">
+          <tr><td><button v-on:click="moveUp(index)">Up</button></td><td>{{item}}</td><td><button v-on:click="moveDown(index)">Down</button></td></tr>
+        </template>
+      </table>
+    </div>
+
+  </body>
+</html>

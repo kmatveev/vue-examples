@@ -1,0 +1,68 @@
+<html>
+<head>
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+// I wrap my script into function to be called when page will be loaded
+function myApp() {
+
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    groceryList: [
+      { text: 'Vegetables' },
+      { text: 'Cheese' },
+      { text: 'Whatever else humans are supposed to eat' }
+    ],
+    message: 'Hello',
+    name: 'User',
+    nameColor: 'black',
+    reversedNameClass: 'black'
+  },
+  computed: {
+    reversedMessage: function() {
+      return this.message.split('').reverse().join('');
+    }
+  },
+  methods: {
+    reversedUser: function() {
+      return this.name.split('').reverse().join('');
+    }
+  }
+})
+
+}
+</script>
+
+</head>
+ 
+<body onLoad="myApp()">
+
+<div id="app-7">
+  <p v-bind:style="{color: nameColor}">Original message:{{ message }}, {{name}}</p>
+  <p>Reversed message:{{ reversedMessage }}, {{ reversedUser() }}</p>
+  <ol>
+    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+  </ol>
+  <p>Input name: <input v-model="name"/></p>
+  <p> Select color:
+     <select v-model="nameColor">
+       <option disabled value="">Please select one</option>
+       <option>black</option>
+       <option>red</option>
+       <option>blue</option>
+       <option>green</option>
+       <option>yellow</option>
+     </select>
+     Selected: {{nameColor}}
+  </p>
+</div>
+
+
+</body>
+</html>
